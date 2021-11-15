@@ -3,16 +3,9 @@ import s from "./App.module.css";
 import React, {useState } from "react";
 
 import shortid from 'shortid'
-
-import ContactForm from "./components/ContactForm";
 import ContactFormHooks from './components/ContactForm/ContactFormHooks';
-
-import ContactsList from "./components/ContactsList";
 import ContactsListHooks from './components/ContactsList/ContactListHooks'
-
-import Filter from "./components/Filter";
 import FilterHooks from "./components/Filter/FilterHooks";
-
 import db from './db.json'
 
 
@@ -23,8 +16,6 @@ function AppHooks () {
 
 
 const [ contacts, setContacts] = useState ( JSON.parse(localStorage.getItem('contactsLocalSt_db')) );
-
-console.log ( 'contacts =', contacts );
 
   const [ name, setName] = useState ('');
   const [ number, setNumber] = useState ('');
