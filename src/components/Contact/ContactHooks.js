@@ -1,5 +1,5 @@
 import s from "./Contact.module.css";
-import React, { Component } from "react";
+import React from "react";
 
 
 // Прокидывание пропсов по цепочке до "внука": 1:10:00 Репета. Занятие 5. Жизненный цикл 

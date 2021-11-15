@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import s from "./ContactsList.module.css";
 import PropTypes from 'prop-types';
-// import Contact from '../Contact'
 import ContactHooks from '../Contact/ContactHooks'
 
 function ContactsListHooks ({ contactsArray, onDeleteContact }) {
