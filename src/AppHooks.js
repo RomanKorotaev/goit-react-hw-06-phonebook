@@ -19,7 +19,7 @@ const [ contacts, setContacts] = useState ( JSON.parse(localStorage.getItem('con
 
   const [ name, setName] = useState ('');
   const [ number, setNumber] = useState ('');
-  const [  filter, setFilter] = useState ('');
+  const [ filter, setFilter] = useState ('');
   
 
 

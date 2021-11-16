@@ -6,6 +6,7 @@ import AppHooks from './AppHooks'
 import reportWebVitals from './reportWebVitals';
 import store from './redux/store'
 import {addContactAction, deleteContactAction}  from './redux/contact/actions'
+import {Provider} from 'react-redux'
 
 console.log (" store : ", store );
 
@@ -16,7 +17,9 @@ console.log (" deleteContactAction : ", deleteContactAction(-10) );
 
 ReactDOM.render(
   <React.StrictMode>
+    <Provider store={store}>
       <AppHooks/>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,8 +1,10 @@
 import React, { useState} from "react";
 import s from "./ContactForm.module.css";
 import PropTypes from 'prop-types';
+import { connect } from "react-redux";
+import  actions from '../../redux/contactForm/actions'
 
-export default function ContactFormHooks ({onFormSubmit}) {
+function ContactFormHooks ({onFormSubmit}) {
 
     const [name, setName] =useState ('');
     const [number, setNumber] =useState ('');
@@ -91,3 +93,17 @@ export default function ContactFormHooks ({onFormSubmit}) {
         </form>
       );
 }
+
+const mapStateToProps = state => { 
+  return {
+    name: state.name,
+    number: state.number,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return 
+}
+
+
+export default connect(mapStateToProps) (ContactFormHooks);
