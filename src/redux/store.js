@@ -18,6 +18,7 @@ console.log (' Лог action  в reducer: ', action)
             return [...state, action.payload];
 
             case  'contact/delete':
+                console.log ("Консоль из Свича УДАЛЕНИЕ: return state.filter (oneContact =>oneContact.id !== action.payload);", [...state, action.payload])
             return state.filter (oneContact =>oneContact.id !== action.payload);
 
 

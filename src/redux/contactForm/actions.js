@@ -5,8 +5,3 @@ export const addContact = value => {
         };
 }
 
-export const deleteContact = id => {
-    return {type: 'contact/delete',
-            payload: id}
-    };
-

@@ -10,9 +10,9 @@ import {Provider} from 'react-redux'
 
 console.log (" store : ", store );
 
-console.log (" store.dispatch(addContactAction ) : ", store.dispatch(addContactAction(5) ) );
+// console.log (" store.dispatch(addContactAction ) : ", store.dispatch(addContactAction(5) ) );
 
-console.log (" deleteContactAction : ", deleteContactAction(-10) );
+// console.log (" deleteContactAction : ", deleteContactAction(-10) );
 
 
 ReactDOM.render(

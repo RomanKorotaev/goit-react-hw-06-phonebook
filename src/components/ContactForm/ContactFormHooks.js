@@ -2,7 +2,7 @@ import React, { useState} from "react";
 import s from "./ContactForm.module.css";
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
-import  {addContact, setName, setNumber} from '../../redux/contactForm/actions'
+import  {addContact} from '../../redux/contactForm/actions'
 import state from '../../redux/store'
 
 import shortid from 'shortid'
@@ -111,7 +111,6 @@ console.log ('СТЕЙТ state.getState():  ', state.getState() );
 //     ....
 //   }
 // }
-
 
 
 const mapDispatchToProps = dispatch => {

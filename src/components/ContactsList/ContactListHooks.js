@@ -2,9 +2,15 @@ import React, { useState } from "react";
 import s from "./ContactsList.module.css";
 import PropTypes from 'prop-types';
 import ContactHooks from '../Contact/ContactHooks'
+import state from '../../redux/store'
+import {deleteContactMY} from '../../redux/contact/actions'
+import { connect } from "react-redux";
 
-function ContactsListHooks ({ contactsArray, onDeleteContact }) {
 
+
+function ContactsListHooks ({ contactsArray, onDeleteContact, contactsArray2,onDelCont }) {
+
+  console.log ( 'Лог стейта из ContactsList  - state.getState () ', state.getState () )
     const [contacts, setContacts] = useState([]);
 
     const deleteContact = (contactId) => {
@@ -12,11 +18,9 @@ function ContactsListHooks ({ contactsArray, onDeleteContact }) {
         setContacts  ( prevState => ({
             contacts: prevState.contacts.filter ( contact=> contact.id !== contactId)
           }) )
-
-        // this.setState ( prevState => ({
-        //   contacts: prevState.contacts.filter ( contact=> contact.id !== contactId)
-        // }) )
       }
+
+       onDelCont ( )
 
     return (
         <ul className= {s.ContactsListStyle}>
@@ -26,7 +30,11 @@ function ContactsListHooks ({ contactsArray, onDeleteContact }) {
   
                 {/* ВНИМАНИЕ!  Важный синтаксис во время прокидывания пропов по цепочке: onDelete = {()=>onDeleteContact(id)} */}
                     {/* <Contact name={name} number ={number} onDelete = {()=>onDeleteContact(id)} /> */}
-                    <ContactHooks name={name} number ={number} onDelete = {()=>onDeleteContact(id)} />
+                    
+                    {/* <ContactHooks name={name} number ={number} onDelete = {()=>onDeleteContact(id)} /> */}
+
+                    <ContactHooks name={name} number ={number} onDelete = {()=>onDelCont(id)} />
+
               </li>
             ))}
         </ul>
@@ -45,4 +53,15 @@ ContactsListHooks.propTypes = {
     ), 
   };
 
-  export default ContactsListHooks;
+  const mapStateToProps = state => { 
+  return {contactsArray2: state}
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    //Здесь название локальной функции придумывавем сами
+    onDelCont: (id)  => dispatch (deleteContactMY(id)),
+  }
+} 
+
+  export default connect(mapStateToProps, mapDispatchToProps) (ContactsListHooks);
