@@ -5,3 +5,8 @@ export const addContact = value => {
         };
 }
 
+export const deleteContactMY = id => {
+    return {type: 'contact/delete',
+            payload: id}
+    };
+

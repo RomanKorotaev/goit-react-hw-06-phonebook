@@ -5,14 +5,10 @@ import './index.css';
 import AppHooks from './AppHooks'
 import reportWebVitals from './reportWebVitals';
 import store from './redux/store'
-import {addContactAction, deleteContactAction}  from './redux/contact/actions'
+
 import {Provider} from 'react-redux'
 
 console.log (" store : ", store );
-
-// console.log (" store.dispatch(addContactAction ) : ", store.dispatch(addContactAction(5) ) );
-
-// console.log (" deleteContactAction : ", deleteContactAction(-10) );
 
 
 ReactDOM.render(

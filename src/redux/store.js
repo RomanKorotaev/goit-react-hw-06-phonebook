@@ -19,12 +19,18 @@ console.log (' Лог action  в reducer: ', action)
 
             case  'contact/delete':
                 console.log ("Консоль из Свича УДАЛЕНИЕ: return state.filter (oneContact =>oneContact.id !== action.payload);", [...state, action.payload])
-            return state.filter (oneContact =>oneContact.id !== action.payload);
+            return state.filter (oneContact =>{
+                console.log ("Консоль из Свича УДАЛЕНИЕ: oneContact : ", oneContact);
+                console.log ("Консоль из Свича УДАЛЕНИЕ: action.payload : ", action.payload)
+                console.log ( 'Лог стейта при удалении 1 контакта  - state ', state );
+               return oneContact.id !== action.payload
+            });
 
 
     default: return state;
 
     }
+    
 }
    
 
