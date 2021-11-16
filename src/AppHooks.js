@@ -2,7 +2,6 @@
 import s from "./App.module.css";
 import React, {useState } from "react";
 
-import shortid from 'shortid'
 import ContactFormHooks from './components/ContactForm/ContactFormHooks';
 import ContactsListHooks from './components/ContactsList/ContactListHooks'
 import FilterHooks from "./components/Filter/FilterHooks";
@@ -45,7 +44,7 @@ const [ contacts, setContacts] = useState ( JSON.parse(localStorage.getItem('con
         console.log("Новый контакт ( data ) : ", data);
     
         const newContact = {
-          id: shortid.generate(),
+          id: data.id,
           name: data.name,
           number: data.number
         }

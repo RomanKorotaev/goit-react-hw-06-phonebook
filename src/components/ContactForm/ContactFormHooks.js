@@ -2,10 +2,13 @@ import React, { useState} from "react";
 import s from "./ContactForm.module.css";
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
-import  actions from '../../redux/contactForm/actions'
+import  {addContact, setName, setNumber} from '../../redux/contactForm/actions'
+import state from '../../redux/store'
 
-function ContactFormHooks ({onFormSubmit}) {
+import shortid from 'shortid'
 
+function ContactFormHooks ({onFormSubmit, onAdd}) {
+ 
     const [name, setName] =useState ('');
     const [number, setNumber] =useState ('');
 
@@ -34,12 +37,17 @@ function ContactFormHooks ({onFormSubmit}) {
    
     // Записываем  переменные имени и телефона, напечатанные в форме, в объект
     const data = {
+      id: shortid.generate(),
       name: name,
       number: number,
     }
 
     // Передаём объект с новыми данными из формы как пареметр функции - для передачи в Арр (поднятие состояния)
     onFormSubmit(data);
+
+// Диспатчим экшен
+onAdd (data);
+
 
     // Очищаем поля формы
     reset();
@@ -53,6 +61,10 @@ function ContactFormHooks ({onFormSubmit}) {
     setNumber('');
   };
 
+ 
+
+
+console.log ('СТЕЙТ state.getState():  ', state.getState() );
 
     return (
         
@@ -94,16 +106,20 @@ function ContactFormHooks ({onFormSubmit}) {
       );
 }
 
-const mapStateToProps = state => { 
-  return {
-    name: state.name,
-    number: state.number,
-  }
-}
+// const mapStateToProps = state => { 
+//   return {
+//     ....
+//   }
+// }
+
+
 
 const mapDispatchToProps = dispatch => {
-  return 
-}
+  return {
+    //Здесь название локальной функции придумывавем сами
+    onAdd: data => dispatch (addContact(data)),
+  }
+} 
 
 
-export default connect(mapStateToProps) (ContactFormHooks);
+export default connect(null, mapDispatchToProps) (ContactFormHooks);
