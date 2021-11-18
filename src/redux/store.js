@@ -25,6 +25,7 @@ console.log (' Лог action  в reducer: ', action)
                 contacts: [...state.contacts, action.payload]
             }            
      
+
         case  'contact/delete':
                 // console.log ("Консоль из Свича УДАЛЕНИЕ: state.contacts : ", state.contacts)
 
@@ -35,21 +36,33 @@ console.log (' Лог action  в reducer: ', action)
                 contacts: [...tmpArr]
             };
 
+
+
+
+
+
+
+
         case  'filter/value':
             console.log ('TEST: state  В - filter/value', state );
             console.log ('TEST: state.filterValue ', state.filterValue)
 
-                        
+            state.filterValue=action.payload;
+
              //Приводим значение фильтра к нижнему регистру (и в функции проверки имена тоже будем приводить к нижнему регистру)
         const  normalizedFilter = action.payload.toLowerCase ();
         console.log ('normalizedFilter = ', normalizedFilter)
     
-              
-        state.filterValue=action.payload; 
 
-        if (action.payload==='') {return state}
+        let tmpArr2 = [];
         
-        const tmpArr2 = [...state.contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter))];
+        if (normalizedFilter!=="") {
+
+         tmpArr2 = [...state.contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter))];
+        } else {
+            console.log (' normalizedFilter  ПУСТОЙ!');
+            return state;
+        }
 
         let tmpArr3 ={};
         console.log ("tmpArr2 : ",  tmpArr2 );
@@ -63,7 +76,7 @@ console.log (' Лог action  в reducer: ', action)
             return tmpArr3;
         } else {
             console.log ('Поиск результатов не дал :( ' )
-            // alert ("Ничего не найдено!")
+            
             return state;
         }
 

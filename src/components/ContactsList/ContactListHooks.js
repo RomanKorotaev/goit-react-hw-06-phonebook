@@ -27,24 +27,23 @@ function ContactsListHooks ({ contactsArray, onDeleteContact,  contactsArray2, o
 
     return (
         <ul className= {s.ContactsListStyle}>
-          
-          {/* {contactsArray.map(({id, name, number}) => ( */}
+            { contactsArray2.length<1
+                ?   ( <p> List of contacts is empty </p> )
+                :   ( contactsArray2.map(({id, name, number}) => (
+                        
+                      <li  className= {s.item}  key = {id}>
 
-            {contactsArray2.map(({id, name, number}) => (
-          
-              <li  className= {s.item}  key = {id}>
-  
-                {/* ВНИМАНИЕ!  Важный синтаксис во время прокидывания пропов по цепочке: onDelete = {()=>onDeleteContact(id)} */}
-                    {/* <Contact name={name} number ={number} onDelete = {()=>onDeleteContact(id)} /> */}
-                    
-                    {/* <ContactHooks name={name} number ={number} onDelete = {()=>onDeleteContact(id)} /> */}
+                        {/* ВНИМАНИЕ!  Важный синтаксис во время прокидывания пропов по цепочке: onDelete = {()=>onDeleteContact(id)} */}
+                            {/* <Contact name={name} number ={number} onDelete = {()=>onDeleteContact(id)} /> */}
+                            
+                            {/* <ContactHooks name={name} number ={number} onDelete = {()=>onDeleteContact(id)} /> */}
 
-                    <ContactHooks name={name} number ={number} onDelete = {()=>onDelCont(id)} />
+                            <ContactHooks name={name} number ={number} onDelete = {()=>onDelCont(id)} />
 
-              </li>
-            ))}
+                      </li>
+                )))
+            }
         </ul>
-  
       );
 }
 
@@ -60,7 +59,9 @@ ContactsListHooks.propTypes = {
   };
 
   const mapStateToProps = state => { 
+
   return {contactsArray2: state.contacts}
+  // return {contactsArray2: []};
 }
 
 const mapDispatchToProps = dispatch => {
