@@ -37,12 +37,6 @@ console.log (' Лог action  в reducer: ', action)
             };
 
 
-
-
-
-
-
-
         case  'filter/value':
             console.log ('TEST: state  В - filter/value', state );
             console.log ('TEST: state.filterValue ', state.filterValue)
@@ -53,7 +47,8 @@ console.log (' Лог action  в reducer: ', action)
         const  normalizedFilter = action.payload.toLowerCase ();
         console.log ('normalizedFilter = ', normalizedFilter)
     
-        let tmpArr2 = [];
+        let tmpArr2 = null;
+        let filteredState = null;
         
         if (normalizedFilter!=="") {
 
@@ -63,46 +58,25 @@ console.log (' Лог action  в reducer: ', action)
             return state;
         }
 
-        let tmpArr3 ={};
+        
+
+        // tmpArr2 = [...state.contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter))];
+
+        
         console.log ("tmpArr2 : ",  tmpArr2 );
         console.log ("tmpArr2.length : ",  tmpArr2.length );
 
         if (tmpArr2.length>0) {
-            tmpArr3 = { contacts:tmpArr2, filterValue:action.payload }
-            console.log ('tmpArr3 = ', tmpArr3 )
+            filteredState = { contacts:tmpArr2, filterValue:action.payload }
+            console.log ( 'filteredState = ', filteredState )
             state.filterValue=''
             action.payload=''
-            return tmpArr3;
-        } else {  console.log ('Поиск результатов не дал :( ' ); }
+            return  filteredState;
+        } else {  console.log ('Поиск результатов не дал :( ' );
+                  return state;   }
 
-        // else {
-        //     console.log ('Поиск результатов не дал :( ' )
-            
-        //     return state;
-        // }
-
-        if (normalizedFilter==="") {
-            tmpArr3 ={};
-            tmpArr2 = []
-            // return state;
-        }
-
-        if (state.filterValue==='') {
-             tmpArr3 ={};
-             tmpArr2 = []
-            // return state;
-        }
 
        
-
-        // const tmpArr3 = { contacts:tmpArr2, filterValue:action.payload }
-
-        // console.log ('tmpArr3 = ', tmpArr3 )
-
-
-    
-            // return state;
-
 
     default: return state;
 
@@ -110,19 +84,6 @@ console.log (' Лог action  в reducer: ', action)
     
 }
    
-
-// const contactsFilter = (state = '', action) => {
-//     return state;
-// }
-
-// export const contacsreducer = combineReducers (
-//     {
-//         contacts: reducer,
-//         filter: contactsFilter
-//     }
-// )
-
-
 
 const store=  createStore (reducer);
 

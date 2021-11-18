@@ -12,6 +12,6 @@ export const deleteContactMY = id => {
 
     export const setFilter = value => {
         return {type: 'filter/value',
-                payload: value}
+                payload: value.trim()}
         };
 
