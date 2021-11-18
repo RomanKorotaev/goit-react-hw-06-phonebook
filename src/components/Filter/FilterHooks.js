@@ -8,11 +8,15 @@ import state from '../../redux/store'
 
 function FilterHooks ({value, handleFilter, value2, handleFilter2,  handleFilter3}) {
 
+  // var throttle = require('lodash.throttle');
+  var debounce = require('lodash.debounce'); 
+
   const changeFilter3 = e => {
-    // state.filter = e.currentTarget.value
+   
+
+    // debounce(handleFilter3 (e.currentTarget.value), 1000)
 
     handleFilter3 (e.currentTarget.value)
-
 
   }
 
@@ -35,7 +39,7 @@ function FilterHooks ({value, handleFilter, value2, handleFilter2,  handleFilter
                   // value = {value2} 
                   
                 //  onChange={handleFilter}
-                onChange={changeFilter3} 
+                onChange={ changeFilter3 } 
                 // onChange={handleFilter3Test} 
                   placeholder="Введите имя для поиска контакта"
               />
