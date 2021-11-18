@@ -22,21 +22,21 @@ const [ contacts, setContacts] = useState ( JSON.parse(localStorage.getItem('con
   
 
 
-  // Функция о выводе предупреждения, если пользователь хочет добавить контакты, имена которых уже есть в телефонной книге.
-  //Её вызов делаем внутри функции сабмита формы formSubmitHandler
-  const isExist  = (data) => {
-    //из нового полученного объекта с новым контактом берём name переводим в нижний регистр и ищем такие же имена в существующем списке контактов
+  // // Функция о выводе предупреждения, если пользователь хочет добавить контакты, имена которых уже есть в телефонной книге.
+  // //Её вызов делаем внутри функции сабмита формы formSubmitHandler
+  // const isExist  = (data) => {
+  //   //из нового полученного объекта с новым контактом берём name переводим в нижний регистр и ищем такие же имена в существующем списке контактов
     
-    const  normalizedNewName = data.name.toLowerCase ();
-    const tmpArray = contacts.filter(contact => contact.name.toLowerCase().includes(normalizedNewName));
+  //   const  normalizedNewName = data.name.toLowerCase ();
+  //   const tmpArray = contacts.filter(contact => contact.name.toLowerCase().includes(normalizedNewName));
 
-    if (tmpArray.length!==0) {
-      alert (`${tmpArray[0].name} is already in contacts`)
-       return true;
-      } else {
-        return false;
-       }
-  }
+  //   if (tmpArray.length!==0) {
+  //     alert (`${tmpArray[0].name} is already in contacts`)
+  //      return true;
+  //     } else {
+  //       return false;
+  //      }
+  // }
 
 
     const formSubmitHandler = (data) => {
@@ -48,15 +48,21 @@ const [ contacts, setContacts] = useState ( JSON.parse(localStorage.getItem('con
           name: data.name,
           number: data.number
         }
-            if ( isExist(data) ) {
-            // если функция isExist возврвтит true, то такой контакт уже есть и мы сразу выходим, ничего не добавляем в список
-             return;
-                } else {
-                  // Обновляем прежнее состояние массива через распыление
-                   setContacts ([newContact, ...contacts ])
-               }         
-      };
 
+
+      //       if ( isExist(data) ) {
+      //       // если функция isExist возврвтит true, то такой контакт уже есть и мы сразу выходим, ничего не добавляем в список
+      //        return;
+      //           } else {
+      //             // Обновляем прежнее состояние массива через распыление
+      //              setContacts ([newContact, ...contacts ])
+      //          }         
+      // };
+
+      // Обновляем прежнее состояние массива через распыление
+      setContacts ([newContact, ...contacts ])
+    };
+     
       // Записываем новый массив контактов в localStorage
       localStorage.setItem('contactsLocalSt_db',   JSON.stringify( contacts)  );
     

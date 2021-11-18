@@ -7,10 +7,29 @@ import state from '../../redux/store'
 
 import shortid from 'shortid'
 
-function ContactFormHooks ({onFormSubmit, onAdd}) {
+function ContactFormHooks ({onFormSubmit, onAdd, contacts2}) {
  
     const [name, setName] =useState ('');
     const [number, setNumber] =useState ('');
+
+
+     // Функция о выводе предупреждения, если пользователь хочет добавить контакты, имена которых уже есть в телефонной книге.
+  //Её вызов делаем внутри функции сабмита формы formSubmitHandler
+  const isExist  = (data) => {
+    //из нового полученного объекта с новым контактом берём name переводим в нижний регистр и ищем такие же имена в существующем списке контактов
+    
+    const  normalizedNewName = data.name.toLowerCase ();
+    const tmpArray = contacts2.filter(contact => contact.name.toLowerCase().includes(normalizedNewName));
+
+    if (tmpArray.length!==0) {
+      alert (`${tmpArray[0].name} is already in contacts`)
+       return true;
+      } else {
+        return false;
+       }
+  }
+
+
 
 
      // Это единый обработчик для разных элементов. Выбираем нужный по атрибуту name (задать каждому элементу свой)
@@ -45,10 +64,16 @@ function ContactFormHooks ({onFormSubmit, onAdd}) {
     // Передаём объект с новыми данными из формы как пареметр функции - для передачи в Арр (поднятие состояния)
     onFormSubmit(data);
 
-// Диспатчим экшен
-onAdd (data);
 
-
+    
+    if ( isExist(data) ) {
+      // если функция isExist возврвтит true, то такой контакт уже есть и мы сразу выходим, ничего не добавляем в список
+       return;
+          } else {
+            // Диспатчим экшен
+            onAdd (data);
+             
+         }    
     // Очищаем поля формы
     reset();
   };
@@ -112,6 +137,9 @@ console.log ('СТЕЙТ state.getState():  ', state.getState() );
 //   }
 // }
 
+const mapStateToProps = state => { 
+  return {contacts2: state.contacts}
+}
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -121,4 +149,4 @@ const mapDispatchToProps = dispatch => {
 } 
 
 
-export default connect(null, mapDispatchToProps) (ContactFormHooks);
+export default connect(mapStateToProps, mapDispatchToProps) (ContactFormHooks);

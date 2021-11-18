@@ -7,7 +7,7 @@ const initialState ={
                     {id:"id-3", name: "Eden Clements", number: "645-17-79"},
                     {id:"id-4", name: "Annie Copeland", number: "227-91-26"}
                 ],
-                filter:'',
+                filterValue:'+++',
             }
     
 
@@ -35,6 +35,29 @@ console.log (' Лог action  в reducer: ', action)
                 contacts: [...tmpArr]
             };
 
+        case  'filter/value':
+            console.log ('TEST: state  В - filter/value', state );
+            console.log ('TEST: state.filterValue ', state.filterValue)
+
+                        
+             //Приводим значение фильтра к нижнему регистру (и в функции проверки имена тоже будем приводить к нижнему регистру)
+        const  normalizedFilter = action.payload.toLowerCase ();
+        console.log ('normalizedFilter = ', normalizedFilter)
+    
+              
+        state.filterValue=action.payload; 
+        const tmpArr2 = {...state.contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter))};
+
+        console.log ("tmpArr2 : ",  tmpArr2 );
+
+        const tmpArr3 = { contacts:tmpArr2, filterValue:action.payload }
+
+        console.log ('tmpArr3 = ', tmpArr3 )
+
+
+    
+            return tmpArr3;
+
 
     default: return state;
 
@@ -43,9 +66,9 @@ console.log (' Лог action  в reducer: ', action)
 }
    
 
-const contactsFilter = (state = '', action) => {
-    return state;
-}
+// const contactsFilter = (state = '', action) => {
+//     return state;
+// }
 
 // export const contacsreducer = combineReducers (
 //     {

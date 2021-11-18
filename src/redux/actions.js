@@ -10,3 +10,8 @@ export const deleteContactMY = id => {
             payload: id}
     };
 
+    export const setFilter = value => {
+        return {type: 'filter/value',
+                payload: value}
+        };
+
