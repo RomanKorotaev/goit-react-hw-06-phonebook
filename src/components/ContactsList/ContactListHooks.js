@@ -28,7 +28,7 @@ function ContactsListHooks ({ contactsArray, onDeleteContact,  contactsArray2, o
     return (
         <ul className= {s.ContactsListStyle}>
             { contactsArray2.length<1
-                ?   ( <p> List of contacts is empty </p> )
+                ?   ( <p className={s.item}> List of contacts is empty </p> )
                 :   ( contactsArray2.map(({id, name, number}) => (
                         
                       <li  className= {s.item}  key = {id}>
