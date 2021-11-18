@@ -14,14 +14,14 @@ function ContactsListHooks ({ contactsArray, onDeleteContact,  contactsArray2, o
 
   console.log ( 'Лог стейта из ContactsList  - state.getState () ', state.getState () );
 
-    const [contacts, setContacts] = useState([]);
+    // const [contacts, setContacts] = useState([]);
 
-    const deleteContact = (contactId) => {
+    // const deleteContact = (contactId) => {
 
-        setContacts  ( prevState => ({
-            contacts: prevState.contacts.filter ( contact=> contact.id !== contactId)
-          }) )
-      }
+    //     setContacts  ( prevState => ({
+    //         contacts: prevState.contacts.filter ( contact=> contact.id !== contactId)
+    //       }) )
+    //   }
 
      
 

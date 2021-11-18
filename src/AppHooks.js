@@ -74,13 +74,13 @@ const [ contacts, setContacts] = useState ( JSON.parse(localStorage.getItem('con
       }
 
 
-  const deleteContact = (contactId) => {
-    setContacts ( contacts.filter ( contact=> contact.id !== contactId))
+  // const deleteContact = (contactId) => {
+  //   setContacts ( contacts.filter ( contact=> contact.id !== contactId))
     
-    // Записываем в localStorage обновлённый массив после удаления одного контакта
-    localStorage.setItem('contactsLocalSt_db',   JSON.stringify( contacts)  );
+  //   // Записываем в localStorage обновлённый массив после удаления одного контакта
+  //   localStorage.setItem('contactsLocalSt_db',   JSON.stringify( contacts)  );
 
-  }
+  // }
 
 
 
@@ -98,7 +98,8 @@ const [ contacts, setContacts] = useState ( JSON.parse(localStorage.getItem('con
           <FilterHooks value = {filter} handleFilter = {changeFilter}/>
 
 
-          <ContactsListHooks contactsArray={visibleContacts} onDeleteContact = {deleteContact}/>          
+          {/* <ContactsListHooks contactsArray={visibleContacts} onDeleteContact = {deleteContact}/>  */}
+          <ContactsListHooks />         
 
     </div>
   );
