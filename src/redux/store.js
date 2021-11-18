@@ -46,17 +46,36 @@ console.log (' Лог action  в reducer: ', action)
     
               
         state.filterValue=action.payload; 
-        const tmpArr2 = {...state.contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter))};
 
+        if (action.payload==='') {return state}
+        
+        const tmpArr2 = [...state.contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter))];
+
+        let tmpArr3 ={};
         console.log ("tmpArr2 : ",  tmpArr2 );
+        console.log ("tmpArr2.length : ",  tmpArr2.length );
 
-        const tmpArr3 = { contacts:tmpArr2, filterValue:action.payload }
+        if (tmpArr2.length>0) {
+            tmpArr3 = { contacts:tmpArr2, filterValue:action.payload }
+            console.log ('tmpArr3 = ', tmpArr3 )
+            state.filterValue=''
+            action.payload=''
+            return tmpArr3;
+        } else {
+            console.log ('Поиск результатов не дал :( ' )
+            // alert ("Ничего не найдено!")
+            return state;
+        }
 
-        console.log ('tmpArr3 = ', tmpArr3 )
+       
+
+        // const tmpArr3 = { contacts:tmpArr2, filterValue:action.payload }
+
+        // console.log ('tmpArr3 = ', tmpArr3 )
 
 
     
-            return tmpArr3;
+            // return state;
 
 
     default: return state;
