@@ -1,11 +1,14 @@
 import {combineReducers, createStore} from "redux";
 
-const initialState = [
+const initialState ={
+     contacts: [
                     {id:"id-1", name: "Rosie Simpson", number: "459-12-56"},
                     {id:"id-2", name: "Hermione Kline", number: "443-89-12"},
                     {id:"id-3", name: "Eden Clements", number: "645-17-79"},
                     {id:"id-4", name: "Annie Copeland", number: "227-91-26"}
-                ]
+                ],
+                filter:'',
+            }
     
 
 
@@ -14,17 +17,23 @@ console.log (' Лог action  в reducer: ', action)
 
     switch(action.type) {
         case  'contact/add':
-            console.log ("Консоль из Свича [...state.contacts, action.payload]", [...state, action.payload])
-            return [...state, action.payload];
+            console.log ("Консоль из Свича [...state.contacts, action.payload]", [...state.contacts, action.payload])
+            // return [...state, action.payload];
 
-            case  'contact/delete':
-                console.log ("Консоль из Свича УДАЛЕНИЕ: return state.filter (oneContact =>oneContact.id !== action.payload);", [...state, action.payload])
-            return state.filter (oneContact =>{
-                console.log ("Консоль из Свича УДАЛЕНИЕ: oneContact : ", oneContact);
-                console.log ("Консоль из Свича УДАЛЕНИЕ: action.payload : ", action.payload)
-                console.log ( 'Лог стейта при удалении 1 контакта  - state ', state );
-               return oneContact.id !== action.payload
-            });
+            console.log ('TEST: state ', state )
+            return {...state,
+                contacts: [...state.contacts, action.payload]
+            }            
+     
+        case  'contact/delete':
+                // console.log ("Консоль из Свича УДАЛЕНИЕ: state.contacts : ", state.contacts)
+
+                    const tmpArr= state.contacts.filter (oneContact =>{
+                                return oneContact.id !== action.payload
+                            })
+            return {...state,
+                contacts: [...tmpArr]
+            };
 
 
     default: return state;

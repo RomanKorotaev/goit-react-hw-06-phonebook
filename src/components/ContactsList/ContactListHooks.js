@@ -60,7 +60,7 @@ ContactsListHooks.propTypes = {
   };
 
   const mapStateToProps = state => { 
-  return {contactsArray2: state}
+  return {contactsArray2: state.contacts}
 }
 
 const mapDispatchToProps = dispatch => {
