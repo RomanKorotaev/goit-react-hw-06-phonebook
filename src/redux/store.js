@@ -53,7 +53,6 @@ console.log (' Лог action  в reducer: ', action)
         const  normalizedFilter = action.payload.toLowerCase ();
         console.log ('normalizedFilter = ', normalizedFilter)
     
-
         let tmpArr2 = [];
         
         if (normalizedFilter!=="") {
@@ -74,10 +73,7 @@ console.log (' Лог action  в reducer: ', action)
             state.filterValue=''
             action.payload=''
             return tmpArr3;
-        } else {  console.log ('Поиск результатов не дал :( ' );
-                
-                }
-
+        } else {  console.log ('Поиск результатов не дал :( ' ); }
 
         // else {
         //     console.log ('Поиск результатов не дал :( ' )
