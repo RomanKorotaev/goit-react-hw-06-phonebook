@@ -1,4 +1,6 @@
 import db from '../db.json'
+import {combineReducers} from "redux";
+
 
 // Записываем стартовые значения контактов в localStorage
 localStorage.setItem('contactsLocalSt_db',   JSON.stringify( [...db] ) );
