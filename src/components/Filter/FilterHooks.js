@@ -6,27 +6,14 @@ import {setFilter} from '../../redux/actions'
 import state from '../../redux/store'
 
 
-function FilterHooks ({value, handleFilter, value2, handleFilter2,  handleFilter3}) {
+function FilterHooks ({ handleFilter3}) {
 
   // var throttle = require('lodash.throttle');
-  var debounce = require('lodash.debounce'); 
+  // var debounce = require('lodash.debounce'); 
 
   const changeFilter3 = e => {
-   
-
-    // debounce(handleFilter3 (e.currentTarget.value), 1000)
-
     handleFilter3 (e.currentTarget.value)
-
   }
-
-
-   const handleFilter3Test = e => {
-     console.log ("СРАБОТАЛ ИНПУТ ФИЛЬТРА ,  е = ", e);
-     console.log ("СРАБОТАЛ ИНПУТ ФИЛЬТРА ,  e.currentTarget.value = ", e.currentTarget.value)
-   } 
-
-  
 
     return (
         <label className = {s.filterTitle}>
@@ -38,22 +25,22 @@ function FilterHooks ({value, handleFilter, value2, handleFilter2,  handleFilter
                   // value = {value} 
                   // value = {value2} 
                   
-                //  onChange={handleFilter}
+                
                 onChange={ changeFilter3 } 
-                // onChange={handleFilter3Test} 
+                
                   placeholder="Введите имя для поиска контакта"
               />
             </label> 
     )
 }
 
-FilterHooks.propTypes = {
-    value: PropTypes.string,
-   }
+// FilterHooks.propTypes = {
+//     value: PropTypes.string,
+//    }
 
-   const mapStateToProps = state => { 
-    return {value2: state.filterValue}
-  }
+  //  const mapStateToProps = state => { 
+  //   return {value2: state.filterValue}
+  // }
 
 
    const mapDispatchToProps = dispatch => {
@@ -64,4 +51,4 @@ FilterHooks.propTypes = {
   } 
    
 
-export default connect(mapStateToProps, mapDispatchToProps) (FilterHooks);
+export default connect(null, mapDispatchToProps) (FilterHooks);

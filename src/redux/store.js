@@ -8,6 +8,7 @@ const initialState ={
                     {id:"id-4", name: "Annie Copeland", number: "227-91-26"}
                 ],
                 filterValue:'',
+                filteredContacts: [],
             }
     
 
@@ -15,6 +16,8 @@ const initialState ={
 const reducer = ( state = initialState, action )=> {
 console.log (' Лог action  в reducer: ', action)
 
+
+// Добавление нового контакта
     switch(action.type) {
         case  'contact/add':
             console.log ("Консоль из Свича [...state.contacts, action.payload]", [...state.contacts, action.payload])
@@ -25,7 +28,7 @@ console.log (' Лог action  в reducer: ', action)
                 contacts: [...state.contacts, action.payload]
             }            
      
-
+// Удаление контакта
         case  'contact/delete':
                 // console.log ("Консоль из Свича УДАЛЕНИЕ: state.contacts : ", state.contacts)
 
@@ -36,47 +39,23 @@ console.log (' Лог action  в reducer: ', action)
                 contacts: [...tmpArr]
             };
 
-
+// Фильтрация контактов по заданному поисковому слову
         case  'filter/value':
-            console.log ('TEST: state  В - filter/value', state );
-            console.log ('TEST: state.filterValue ', state.filterValue)
+            console.log ('TEST: state  in   filter/value', state );
+            console.log ('TEST: state.filterValue ', state.filterValue);
+            console.log ('TEST:  state.filteredContacts = ', state.filteredContacts)
 
-            state.filterValue=action.payload;
-
-             //Приводим значение фильтра к нижнему регистру (и в функции проверки имена тоже будем приводить к нижнему регистру)
-        const  normalizedFilter = action.payload.toLowerCase ();
-        console.log ('normalizedFilter = ', normalizedFilter)
-    
-        let tmpArr2 = null;
-        let filteredState = null;
+            state.filterValue=action.payload.toLowerCase ();
         
-        if (normalizedFilter!=="") {
-
-         tmpArr2 = [...state.contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter))];
+        if (state.filterValue!=="") {
+            return {...state,
+                filteredContacts: [...state.contacts.filter(contact => contact.name.toLowerCase().includes(state.filterValue))]   }
         } else {
-            console.log (' normalizedFilter  ПУСТОЙ!');
-            return state;
+            console.log (' state.filterValue  ПУСТОЙ!');
+
+            return {...state,
+                filteredContacts: []}
         }
-
-        
-
-        // tmpArr2 = [...state.contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter))];
-
-        
-        console.log ("tmpArr2 : ",  tmpArr2 );
-        console.log ("tmpArr2.length : ",  tmpArr2.length );
-
-        if (tmpArr2.length>0) {
-            filteredState = { contacts:tmpArr2, filterValue:action.payload }
-            console.log ( 'filteredState = ', filteredState )
-            state.filterValue=''
-            action.payload=''
-            return  filteredState;
-        } else {  console.log ('Поиск результатов не дал :( ' );
-                  return state;   }
-
-
-       
 
     default: return state;
 

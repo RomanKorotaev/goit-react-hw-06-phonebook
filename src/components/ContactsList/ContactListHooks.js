@@ -10,20 +10,9 @@ import { connect } from "react-redux";
 
 
 
-function ContactsListHooks ({ contactsArray, onDeleteContact,  contactsArray2, onDelCont }) {
+function ContactsListHooks ({ contactsArray2, onDelCont }) {
 
   console.log ( 'Лог стейта из ContactsList  - state.getState () ', state.getState () );
-
-    // const [contacts, setContacts] = useState([]);
-
-    // const deleteContact = (contactId) => {
-
-    //     setContacts  ( prevState => ({
-    //         contacts: prevState.contacts.filter ( contact=> contact.id !== contactId)
-    //       }) )
-    //   }
-
-     
 
     return (
         <ul className= {s.ContactsListStyle}>
@@ -32,14 +21,7 @@ function ContactsListHooks ({ contactsArray, onDeleteContact,  contactsArray2, o
                 :   ( contactsArray2.map(({id, name, number}) => (
                         
                       <li  className= {s.item}  key = {id}>
-
-                        {/* ВНИМАНИЕ!  Важный синтаксис во время прокидывания пропов по цепочке: onDelete = {()=>onDeleteContact(id)} */}
-                            {/* <Contact name={name} number ={number} onDelete = {()=>onDeleteContact(id)} /> */}
-                            
-                            {/* <ContactHooks name={name} number ={number} onDelete = {()=>onDeleteContact(id)} /> */}
-
                             <ContactHooks name={name} number ={number} onDelete = {()=>onDelCont(id)} />
-
                       </li>
                 )))
             }
@@ -60,8 +42,12 @@ ContactsListHooks.propTypes = {
 
   const mapStateToProps = state => { 
 
-  return {contactsArray2: state.contacts}
-  // return {contactsArray2: []};
+    if (state.filteredContacts.length>1) {
+      return {contactsArray2: state.filteredContacts} 
+    } else {
+      return {contactsArray2: state.contacts}
+    }
+
 }
 
 const mapDispatchToProps = dispatch => {

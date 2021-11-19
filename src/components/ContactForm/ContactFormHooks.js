@@ -30,8 +30,6 @@ function ContactFormHooks ({onFormSubmit, onAdd, contacts2}) {
   }
 
 
-
-
      // Это единый обработчик для разных элементов. Выбираем нужный по атрибуту name (задать каждому элементу свой)
   // и через вычисляемое (диннамическое) свойство объекта присваеваем нужному элементу нужное велью
   const handleChange = (e) => {
@@ -63,8 +61,6 @@ function ContactFormHooks ({onFormSubmit, onAdd, contacts2}) {
 
     // Передаём объект с новыми данными из формы как пареметр функции - для передачи в Арр (поднятие состояния)
     onFormSubmit(data);
-
-
     
     if ( isExist(data) ) {
       // если функция isExist возврвтит true, то такой контакт уже есть и мы сразу выходим, ничего не добавляем в список
@@ -131,11 +127,6 @@ console.log ('СТЕЙТ state.getState():  ', state.getState() );
       );
 }
 
-// const mapStateToProps = state => { 
-//   return {
-//     ....
-//   }
-// }
 
 const mapStateToProps = state => { 
   return {contacts2: state.contacts}
