@@ -46,7 +46,6 @@ const [ contacts, setContacts] = useState ( JSON.parse(localStorage.getItem('con
 
           <FilterHooks/>
 
-          {/* <ContactsListHooks contactsArray={visibleContacts} onDeleteContact = {deleteContact}/>  */}
           <ContactsListHooks />         
 
     </div>

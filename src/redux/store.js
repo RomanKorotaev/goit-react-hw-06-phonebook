@@ -8,7 +8,6 @@ const initialState ={
                     {id:"id-4", name: "Annie Copeland", number: "227-91-26"}
                 ],
                 filterValue:'',
-                filteredContacts: [],
             }
     
 
@@ -21,8 +20,7 @@ console.log (' Лог action  в reducer: ', action)
     switch(action.type) {
         case  'contact/add':
             console.log ("Консоль из Свича [...state.contacts, action.payload]", [...state.contacts, action.payload])
-            // return [...state, action.payload];
-
+            
             console.log ('TEST: state ', state )
             return {...state,
                 contacts: [...state.contacts, action.payload]
@@ -30,9 +28,7 @@ console.log (' Лог action  в reducer: ', action)
      
 // Удаление контакта
         case  'contact/delete':
-                // console.log ("Консоль из Свича УДАЛЕНИЕ: state.contacts : ", state.contacts)
-
-                    const tmpArr= state.contacts.filter (oneContact =>{
+                                const tmpArr= state.contacts.filter (oneContact =>{
                                 return oneContact.id !== action.payload
                             })
             return {...state,
@@ -45,17 +41,9 @@ console.log (' Лог action  в reducer: ', action)
             console.log ('TEST: state.filterValue ', state.filterValue);
             console.log ('TEST:  state.filteredContacts = ', state.filteredContacts)
 
-            state.filterValue=action.payload.toLowerCase ();
-        
-        if (state.filterValue!=="") {
             return {...state,
-                filteredContacts: [...state.contacts.filter(contact => contact.name.toLowerCase().includes(state.filterValue))]   }
-        } else {
-            console.log (' state.filterValue  ПУСТОЙ!');
-
-            return {...state,
-                filteredContacts: []}
-        }
+                filterValue: action.payload
+            }  
 
     default: return state;
 

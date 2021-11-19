@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import s from "./ContactsList.module.css";
 import PropTypes from 'prop-types';
 import ContactHooks from '../Contact/ContactHooks'
@@ -10,15 +10,31 @@ import { connect } from "react-redux";
 
 
 
-function ContactsListHooks ({ contactsArray2, onDelCont }) {
+function ContactsListHooks ({ contacts, onDelCont,  filterValue }) {
+
+  const getVisibleContact = () => {
+    //Приводим значение фильтра к нижнему регистру (и в функции проверки имена тоже будем приводить к нижнему регистру)
+    const  normalizedFilter = filterValue.toLowerCase ();
+
+    //Используем метод Array.filter() c MDN. Проверяем есть ли значение из фильтра в массиве контактов (ищем по значению имени)
+    return contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter));
+  }
+
+
+let visibleContacts = getVisibleContact();
+
+
 
   console.log ( 'Лог стейта из ContactsList  - state.getState () ', state.getState () );
 
+  console.log ( 'Лог стейта из ContactsList  -  visibleContacts ', visibleContacts );
+  
+
     return (
         <ul className= {s.ContactsListStyle}>
-            { contactsArray2.length<1
+              {visibleContacts.length<1
                 ?   ( <p className={s.item}> List of contacts is empty </p> )
-                :   ( contactsArray2.map(({id, name, number}) => (
+                :   ( visibleContacts.map(({id, name, number}) => (
                         
                       <li  className= {s.item}  key = {id}>
                             <ContactHooks name={name} number ={number} onDelete = {()=>onDelCont(id)} />
@@ -31,7 +47,7 @@ function ContactsListHooks ({ contactsArray2, onDelCont }) {
 
 ContactsListHooks.propTypes = {
  
-    state: PropTypes.arrayOf(
+    state: PropTypes.arrayOf (
       // Объект с определённой структурой
       PropTypes.shape({
         name: PropTypes.string.isRequired,
@@ -42,11 +58,9 @@ ContactsListHooks.propTypes = {
 
   const mapStateToProps = state => { 
 
-    if (state.filteredContacts.length>1) {
-      return {contactsArray2: state.filteredContacts} 
-    } else {
-      return {contactsArray2: state.contacts}
-    }
+    return {  contacts: state.contacts,
+              filterValue:state.filterValue
+           }
 
 }
 
@@ -59,4 +73,3 @@ const mapDispatchToProps = dispatch => {
 
   export default connect(mapStateToProps, mapDispatchToProps) (ContactsListHooks);
   
-  // export default connect(null, mapDispatchToProps) (ContactsListHooks);
