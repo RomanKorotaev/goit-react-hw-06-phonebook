@@ -10,7 +10,8 @@ import { configureStore } from '@reduxjs/toolkit';
 
 
 const store = configureStore ({
-    reducer: reducer 
+    reducer: reducer,
+    devTools: process.env.NODE_ENV === 'development',
 });
 
 console.log (' Лог store   после Свича: ', store );
