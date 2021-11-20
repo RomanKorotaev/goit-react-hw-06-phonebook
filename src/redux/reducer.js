@@ -56,3 +56,50 @@ export const reducer = ( state = initialState, action )=> {
         } 
     }
        
+
+    /////-----------------
+
+//     const contactsReducer = ( state = initialState, action )=> {
+//         console.log (' Лог action  в reducer: ', action)
+        
+//         // Добавление нового контакта
+//             switch(action.type) {
+//                 case  'contact/add':
+//                     console.log ("Консоль из Свича [...state.contacts, action.payload]", [...state.contacts, action.payload])
+                    
+//                     console.log ('TEST: state ', state );
+        
+//                     //Дописываем новый контакт в localStorage
+//                     localStorage.setItem('contactsLocalSt_db',   JSON.stringify( [...state.contacts, action.payload] ) );
+        
+//                     return {...state,
+//                         contacts: [...state.contacts, action.payload]
+//                     }            
+             
+//         // Удаление контакта
+//                 case  'contact/delete':
+//                         const tmpArr= state.contacts.filter (oneContact =>{
+//                             return oneContact.id !== action.payload
+//                         })
+        
+//                         //Удаляем в localStorage выбранный контакт 
+//                     localStorage.setItem('contactsLocalSt_db',   JSON.stringify( [...tmpArr] ) );
+        
+//                     return {...state,
+//                         contacts: [...tmpArr]
+//                     };
+        
+//             default: return state;
+        
+//             } 
+//         }
+
+
+//         const filterReducer = ( state = '', action )=> {
+//             return state;
+//         }
+
+// export const rootReducer = combineReducers ({
+//     contacts: reducer
+// })
+
