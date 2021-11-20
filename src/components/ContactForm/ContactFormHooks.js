@@ -85,7 +85,7 @@ function ContactFormHooks ({onFormSubmit, onAdd, contacts2}) {
  
 
 
-console.log ('СТЕЙТ state.getState():  ', state.getState() );
+// console.log ('СТЕЙТ state.getState():  ', state.getState() );
 
     return (
         

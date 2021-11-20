@@ -25,9 +25,9 @@ let visibleContacts = getVisibleContact();
 
 
 
-  console.log ( 'Лог стейта из ContactsList  - state.getState () ', state.getState () );
+  // console.log ( 'Лог стейта из ContactsList  - state.getState () ', state.getState () );
 
-  console.log ( 'Лог стейта из ContactsList  -  visibleContacts ', visibleContacts );
+  // console.log ( 'Лог стейта из ContactsList  -  visibleContacts ', visibleContacts );
   
 
     return (
