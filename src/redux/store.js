@@ -1,9 +1,5 @@
-import {combineReducers} from "redux";
 import {reducer} from './reducer'
-
-
-
-// import {create Store} from "redux";
+// import {createStore} from "redux";
 import { configureStore } from '@reduxjs/toolkit';
 
 

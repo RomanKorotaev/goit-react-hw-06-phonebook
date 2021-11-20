@@ -5,6 +5,9 @@ import { createAction } from '@reduxjs/toolkit';
 //             payload: value
 //         };
 // }
+
+
+// ------------- Redux Toolkit -------------
 export const addContact = createAction('contact/add');
 
 
@@ -12,6 +15,8 @@ export const addContact = createAction('contact/add');
 //     return {type: 'contact/delete',
 //             payload: id}
 //     };
+
+// ------------- Redux Toolkit -------------
 export const deleteContactMY = createAction('contact/delete');
 
 
@@ -19,5 +24,7 @@ export const deleteContactMY = createAction('contact/delete');
 //         return {type: 'filter/value',
 //                 payload: value.trim()}
 //         };
+
+// ------------- Redux Toolkit -------------  
 export const setFilter = createAction('filter/value');
 
