@@ -1,8 +1,16 @@
 import {reducer} from './reducer'
 // import {createStore} from "redux";
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
-
-import { persistStore, persistReducer } from 'redux-persist'
+import { configureStore, combineReducers, getDefaultMiddleware } from '@reduxjs/toolkit';
+import logger from 'redux-logger'
+import {
+     persistStore,
+      persistReducer,
+      FLUSH,
+      REHYDRATE,
+      PAUSE,
+      PERSIST,
+      PURGE,
+      REGISTER } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
  
 
@@ -11,9 +19,17 @@ const persistConfig = {
     storage,
   }
 
+
+const middleware = [
+    ...getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+    logger,
+  ];
+
   const persistedReducer = persistReducer(persistConfig, reducer)
-//   const persistedReducer = persistReducer(persistConfig, combineReducers(reducer))
- 
 
 
 // const store=  createStore (reducer);
@@ -21,6 +37,7 @@ const persistConfig = {
 const store = configureStore ({
     reducer:  persistedReducer,
     // reducer: reducer,
+    middleware,
     devTools: process.env.NODE_ENV === 'development',
 });
 
@@ -28,7 +45,5 @@ console.log (' Лог store   после Свича: ', store );
 console.log (' Лог store.getState()  после Свича: ', store.getState() );
 
 let persistor = persistStore(store);
-
-// export default store;
 
 export default { store, persistor};
